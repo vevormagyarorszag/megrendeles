@@ -103,6 +103,9 @@
           <div>
             <label>VEVOR termék link <span class="req">*</span></label>
             <input id="productLink" type="url" name="Termék link" required placeholder="https://eur.vevor.com/...">
+            <div class="actions" style="margin-top:10px;">
+              <button class="ghost" type="button" id="fillFromClipboardInline">Link beillesztése vágólapról</button>
+            </div>
             <div class="mini">Elfogadott domainek: eur.vevor.com, vevor.com</div>
           </div>
 
@@ -145,6 +148,14 @@
 
     // Vágólap beillesztés
     document.getElementById("fillFromClipboard").addEventListener("click", async () => {
+      try {
+        const text = await navigator.clipboard.readText();
+        if (text && text.startsWith("http")) productLink.value = text.trim();
+      } catch (_) {}
+    });
+
+    // vágólap beillesztés (mobilbarát gomb a termék link alatt)
+    document.getElementById("fillFromClipboardInline").addEventListener("click", async () => {
       try {
         const text = await navigator.clipboard.readText();
         if (text && text.startsWith("http")) productLink.value = text.trim();
