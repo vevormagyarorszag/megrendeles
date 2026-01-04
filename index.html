@@ -4,24 +4,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VEVOR Magyarország Lajosmizse – Megrendelés</title>
+  <title>VEVOR Magyarország Lajosmizse – Árajánlatkérés</title>
   <style>
     :root{
-      --bg:#0b0f19;
-      --card:#111827;
-      --card2:#0f172a;
-      --text:#e5e7eb;
-      --muted:#a3a3a3;
-      --border:#243047;
-      --accent:#f97316; /* narancs */
-      --accent2:#fb923c;
-      --focus:#60a5fa;
-      --danger:#ef4444;
-      --ok:#22c55e;
+      --bg:#0b0f19; --card:#111827; --card2:#0f172a; --text:#e5e7eb; --muted:#a3a3a3;
+      --border:#243047; --accent:#f97316; --accent2:#fb923c; --focus:#60a5fa;
+      --danger:#ef4444; --ok:#22c55e;
     }
     *{box-sizing:border-box;}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
-    .wrap{max-width:900px;margin:0 auto;padding:22px;}
+    .wrap{max-width:920px;margin:0 auto;padding:22px;}
     .header{
       background:linear-gradient(180deg, rgba(249,115,22,.18), rgba(249,115,22,0));
       border:1px solid rgba(249,115,22,.25);
@@ -30,301 +22,182 @@
       margin-bottom:14px;
     }
     .headerTitle{
-      font-weight:1000;
-      letter-spacing:.6px;
-      text-transform:uppercase;
-      color:var(--accent);
-      font-size:18px;
-      line-height:1.2;
+      font-weight:1000;letter-spacing:.6px;text-transform:uppercase;color:var(--accent);
+      font-size:18px;line-height:1.2;
     }
-    .headerSub{
-      margin-top:6px;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.3;
+    .headerSub{margin-top:6px;color:var(--muted);font-size:13px;line-height:1.35;}
+    .card{
+      background:var(--card);border-radius:18px;padding:20px;
+      box-shadow:0 18px 40px rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.06);
     }
-
-    .card{background:var(--card);border-radius:18px;padding:20px;box-shadow:0 18px 40px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.06);}
-    .toprow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:10px;}
     h1{margin:0 0 6px;font-size:22px;}
     p{margin:0 0 14px;color:#cbd5e1;line-height:1.35;}
-
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-    .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
-    @media (max-width:860px){.grid3{grid-template-columns:1fr;}}
     @media (max-width:760px){.grid{grid-template-columns:1fr;}}
-
-    .badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:950;padding:7px 10px;border-radius:999px;background:rgba(249,115,22,.12);color:var(--accent2);border:1px solid rgba(249,115,22,.22);margin-bottom:10px;}
-    .pillrow{display:flex;gap:10px;flex-wrap:wrap;}
-    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);font-weight:850;font-size:12px;color:#dbeafe;}
-
-    label{display:block;font-weight:900;font-size:13px;margin:10px 0 6px;color:#f3f4f6;}
-    input,select,textarea{
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:12px;font-weight:950;padding:7px 10px;border-radius:999px;
+      background:rgba(249,115,22,.12);color:var(--accent2);
+      border:1px solid rgba(249,115,22,.22);margin-bottom:10px;
+    }
+    label{display:block;font-weight:900;font-size:13px;margin:10px 0 6px;}
+    input,textarea{
       width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);
       font-size:14px;outline:none;background:var(--card2);color:var(--text);
     }
     input::placeholder, textarea::placeholder{color:#94a3b8;}
-    input:focus,select:focus,textarea:focus{border-color:var(--focus);box-shadow:0 0 0 3px rgba(96,165,250,.18);}
-    textarea{min-height:90px;resize:vertical;}
-
+    input:focus,textarea:focus{border-color:var(--focus);box-shadow:0 0 0 3px rgba(96,165,250,.18);}
+    textarea{min-height:92px;resize:vertical;}
     .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
-    button{border:0;padding:12px 14px;border-radius:12px;cursor:pointer;font-weight:950;font-size:14px;background:var(--accent);color:#111827;}
+    button{
+      border:0;padding:12px 14px;border-radius:12px;cursor:pointer;font-weight:950;
+      font-size:14px;background:var(--accent);color:#111827;
+    }
     button:hover{filter:brightness(1.05);}
     .ghost{background:rgba(96,165,250,.14);color:#dbeafe;border:1px solid rgba(96,165,250,.25);}
-
     .ok,.err{display:none;margin-top:12px;padding:12px;border-radius:12px;font-size:14px;}
     .ok{background:rgba(34,197,94,.10);border:1px solid rgba(34,197,94,.25);color:#bbf7d0;}
     .err{background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.25);color:#fecaca;}
-
     .mini{font-size:12px;color:var(--muted);margin-top:8px;}
     .hr{height:1px;background:rgba(255,255,255,.06);margin:16px 0;}
     .req{color:var(--accent2);font-weight:1000;}
-    .filehint{font-size:12px;color:var(--muted);margin-top:6px;}
-    .priceBox{display:none;}
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="header">
-      <div class="headerTitle">VEVOR Magyarország Lajosmizse MEGRENDELÉS</div>
-      <div class="headerSub">Töltse ki a kötelező mezőket, majd küldje el. Az adatok e-mailben azonnal beérkeznek.</div>
+      <div class="headerTitle">VEVOR Magyarország Lajosmizse ÁRAJÁNLATKÉRÉS</div>
+      <div class="headerSub">Töltse ki a mezőket és küldje el. Az árajánlatot kizárólag e-mailben küldöm.</div>
     </div>
 
     <div class="card">
-      <div class="toprow">
+      <h1>Árajánlatkérés</h1>
+      <p>Csak VEVOR linket fogadok el (eur.vevor.com / vevor.com). Más linkkel nem küldhető el.</p>
+
+      <form id="quoteForm" action="https://formspree.io/f/xqeawabb" method="POST" novalidate>
+        <div class="badge">✉️ E-mailes árajánlat</div>
+
+        <div class="grid">
+          <div>
+            <label>Név <span class="req">*</span></label>
+            <input name="Név" required placeholder="Pl. Kovács Péter">
+          </div>
+
+          <div>
+            <label>E-mail <span class="req">*</span></label>
+            <input type="email" name="Email" required placeholder="valaki@email.hu">
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="badge">🧩 Termék</div>
+
+        <div class="grid">
+          <div>
+            <label>VEVOR termék link <span class="req">*</span></label>
+            <input id="productLink" type="url" name="Termék link" required placeholder="https://eur.vevor.com/...">
+            <div class="mini">Elfogadott domainek: eur.vevor.com, vevor.com</div>
+          </div>
+
+          <div>
+            <label>Darabszám</label>
+            <input name="Darabszám" inputmode="numeric" placeholder="1">
+          </div>
+        </div>
+
         <div>
-          <div class="badge"><span aria-hidden="true">📦</span><span>MEGRENDELÉS</span></div>
-          <h1>Adatok megadása</h1>
-          <p>Egyszerű, gyors űrlap. A kitöltés kb. 2 perc.</p>
-        </div>
-        <div class="pillrow">
-          <div class="pill">⏱️ ~2 perc</div>
-          <div class="pill">📩 e-mailben érkezik</div>
-          <div class="pill">🧾 átlátható</div>
-        </div>
-      </div>
-
-      <form id="orderForm" action="https://formspree.io/f/xqeawabb" method="POST" enctype="multipart/form-data">
-        <div class="badge"><span aria-hidden="true">👤</span><span>Kapcsolati adatok</span></div>
-
-        <div class="grid">
-          <div>
-            <label for="name">Név <span class="req">*</span></label>
-            <input id="name" name="Név" required placeholder="Pl. Kovács Péter">
-          </div>
-
-          <div>
-            <label for="phone">Telefonszám <span class="req">*</span></label>
-            <input id="phone" name="Telefonszám" required placeholder="+36...">
-          </div>
-
-          <div>
-            <label for="email">E-mail <span class="req">*</span></label>
-            <input id="email" name="Email" type="email" required placeholder="valaki@email.hu">
-          </div>
-
-          <div>
-            <label for="atvetel">Átvétel <span class="req">*</span></label>
-            <select id="atvetel" name="Átvétel" required>
-              <option value="" selected disabled>Válasszon…</option>
-              <option>Személyes átvétel</option>
-              <option>Postai utánvét</option>
-            </select>
-          </div>
+          <label>Megjegyzés / pontosítás</label>
+          <textarea name="Megjegyzés" placeholder="Pl. méret, típus, szín, verzió, kérés"></textarea>
         </div>
 
-        <div class="hr"></div>
-
-        <div class="badge"><span aria-hidden="true">📍</span><span>Cím</span></div>
-        <div class="grid3">
-          <div>
-            <label for="zip">Irányítószám <span class="req">*</span></label>
-            <input id="zip" name="Irányítószám" inputmode="numeric" required placeholder="Pl. 6050">
-          </div>
-          <div>
-            <label for="city">Város <span class="req">*</span></label>
-            <input id="city" name="Város" required placeholder="Pl. Lajosmizse">
-          </div>
-          <div>
-            <label for="street">Utca, házszám <span class="req">*</span></label>
-            <input id="street" name="Utca, házszám" required placeholder="Pl. Dózsa György út 44.">
-          </div>
-        </div>
-
-        <div class="hr"></div>
-
-        <div class="badge"><span aria-hidden="true">🧩</span><span>Termék</span></div>
-
-        <div class="grid">
-          <div>
-            <label for="productLink">Termék link (VEVOR)</label>
-            <input id="productLink" name="Termék link" type="url" placeholder="https://eur.vevor.com/...">
-            <div class="mini">Ha megvan a link, ez a leggyorsabb.</div>
-          </div>
-
-          <div>
-            <label for="productImg">Termék kép feltöltése</label>
-            <input id="productImg" name="Termék kép" type="file" accept="image/*">
-            <div class="filehint">JPG/PNG ajánlott.</div>
-          </div>
-        </div>
-
-        <div class="grid">
-          <div>
-            <label for="qty">Darabszám</label>
-            <input id="qty" name="Darabszám" inputmode="numeric" placeholder="1">
-          </div>
-          <div>
-            <label for="note">Megjegyzés (opcionális)</label>
-            <input id="note" name="Megjegyzés" placeholder="Pl. mikor hívjam, milyen változat jó, stb.">
-          </div>
-        </div>
-
-        <div class="mini" id="linkOrImgHint" style="display:none;">
-          <span style="color:var(--danger);font-weight:950;">Kérem adjon meg termék linket vagy töltsön fel termék képet.</span>
-        </div>
-
-        <div class="hr"></div>
-
-        <div class="badge"><span aria-hidden="true">💰</span><span>Egyeztetett ár</span></div>
-
-        <div class="mini" id="priceInfo">
-          Ha az ár már egyeztetve lett, ezen az oldalon az ár mező megjelenik (ellenőrzött).
-        </div>
-
-        <div class="grid priceBox" id="priceBox">
-          <div>
-            <label for="agreedPrice">Egyeztetett ár (Ft) <span class="req">*</span></label>
-            <input id="agreedPrice" name="Egyeztetett ár (Ft)" inputmode="numeric" placeholder="Pl. 49990">
-            <div class="mini">Csak a megbeszélt ár adható meg.</div>
-          </div>
-          <div>
-            <label for="priceNote">Megjegyzés (opcionális)</label>
-            <input id="priceNote" name="Ár megjegyzés" placeholder="Pl. egyeztetés ideje">
-          </div>
-        </div>
-
-        <input type="hidden" name="_subject" value="Új MEGRENDELÉS érkezett (űrlap)" />
+        <input type="hidden" name="_subject" value="Új ÁRAJÁNLATKÉRÉS érkezett (űrlap)" />
 
         <div class="actions">
-          <button type="submit">Megrendelés elküldése</button>
-          <button class="ghost" type="button" id="fillFromClipboard">Terméklink beillesztése vágólapról</button>
+          <button type="submit">Árajánlat kérése</button>
+          <button class="ghost" type="button" id="fillFromClipboard">Link beillesztése vágólapról</button>
         </div>
 
-        <div class="ok" id="okBox">✅ Köszönöm! A megrendelést elküldte.</div>
+        <div class="ok" id="okBox">✅ Köszönöm! Az árajánlatkérés elküldve.</div>
         <div class="err" id="errBox">❌ Hiba történt. Kérem ellenőrizze az adatokat.</div>
 
-        <div class="mini">Adatkezelés: a beküldött adatokat kizárólag a megrendelés egyeztetéséhez használom.</div>
+        <div class="mini">Adatkezelés: a beküldött adatokat kizárólag az árajánlat elkészítéséhez használom.</div>
       </form>
     </div>
   </div>
 
   <script>
+    const form = document.getElementById("quoteForm");
+    const okBox = document.getElementById("okBox");
+    const errBox = document.getElementById("errBox");
+    const productLink = document.getElementById("productLink");
+
     // Terméklink automatikus kitöltése a ?termek= paraméterből
-    const url = new URL(window.location.href);
-    const termek = url.searchParams.get("termek");
-    if (termek) document.getElementById("productLink").value = decodeURIComponent(termek);
+    const u = new URL(window.location.href);
+    const termek = u.searchParams.get("termek");
+    if (termek) productLink.value = decodeURIComponent(termek);
 
-    // Ár ellenőrzés: ha a linkben meg van adva az "ar" paraméter, akkor kötelező és egyeznie kell
-    const agreedPriceParamRaw = url.searchParams.get("ar");
-    const agreedPriceParam = agreedPriceParamRaw ? String(agreedPriceParamRaw).trim() : "";
-    const priceBox = document.getElementById("priceBox");
-    const agreedPriceInput = document.getElementById("agreedPrice");
-    const priceInfo = document.getElementById("priceInfo");
-
-    if (agreedPriceParam) {
-      priceBox.style.display = "grid";
-      agreedPriceInput.required = true;
-      priceInfo.textContent = "Az egyeztetett ár ellenőrzött. Kérem pontosan ugyanazt az összeget adja meg.";
-    } else {
-      priceBox.style.display = "none";
-      agreedPriceInput.required = false;
-    }
-
-    // Vágólapról beillesztés
+    // Vágólap beillesztés
     document.getElementById("fillFromClipboard").addEventListener("click", async () => {
       try {
         const text = await navigator.clipboard.readText();
-        if (text && text.startsWith("http")) document.getElementById("productLink").value = text.trim();
+        if (text && text.startsWith("http")) productLink.value = text.trim();
       } catch (_) {}
     });
 
-    const form = document.getElementById("orderForm");
-    const okBox = document.getElementById("okBox");
-    const errBox = document.getElementById("errBox");
-    const linkOrImgHint = document.getElementById("linkOrImgHint");
-    const productLink = document.getElementById("productLink");
-    const productImg = document.getElementById("productImg");
-
-    function hasLinkOrImage(){
-      const hasLink = (productLink.value || "").trim().length > 0;
-      const hasImg = productImg.files && productImg.files.length > 0;
-      return hasLink || hasImg;
+    function isValidVevorUrl(value){
+      try{
+        const url = new URL(value);
+        const host = url.hostname.toLowerCase();
+        const okHosts = ["eur.vevor.com", "www.eur.vevor.com", "vevor.com", "www.vevor.com"];
+        return okHosts.includes(host);
+      } catch(_) {
+        return false;
+      }
     }
 
-    function refreshLinkOrImgHint(){
-      const ok = hasLinkOrImage();
-      linkOrImgHint.style.display = ok ? "none" : "block";
-      return ok;
+    function showError(msg){
+      errBox.style.display = "block";
+      errBox.textContent = "❌ " + msg;
     }
 
-    productLink.addEventListener("input", refreshLinkOrImgHint);
-    productImg.addEventListener("change", refreshLinkOrImgHint);
-
-    // Küldés
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       okBox.style.display = "none";
       errBox.style.display = "none";
-      errBox.textContent = "❌ Hiba történt. Kérem ellenőrizze az adatokat.";
 
-      if (!refreshLinkOrImgHint()){
-        errBox.style.display = "block";
-        errBox.textContent = "❌ Kérem adjon meg termék linket vagy töltsön fel termék képet.";
+      const name = form.querySelector('input[name="Név"]').value.trim();
+      const email = form.querySelector('input[name="Email"]').value.trim();
+      const link = productLink.value.trim();
+
+      if(!name){ showError("A név megadása kötelező."); return; }
+      if(!email){ showError("Az e-mail megadása kötelező."); return; }
+      if(!link){ showError("A VEVOR termék link megadása kötelező."); return; }
+
+      if(!isValidVevorUrl(link)){
+        showError("Csak VEVOR link fogadható el (eur.vevor.com / vevor.com).");
+        productLink.focus();
         return;
       }
 
-      if (agreedPriceParam) {
-        const entered = String(agreedPriceInput.value || "").replace(/\s+/g,"").trim();
-        const expected = agreedPriceParam.replace(/\s+/g,"").trim();
-        if (!entered) {
-          errBox.style.display = "block";
-          errBox.textContent = "❌ Az egyeztetett ár megadása kötelező.";
-          return;
-        }
-        if (entered !== expected) {
-          errBox.style.display = "block";
-          errBox.textContent = "❌ Az egyeztetett ár nem egyezik. A rendelés nem indítható.";
-          return;
-        }
-      }
-
-      try {
+      try{
         const res = await fetch(form.action, {
           method: "POST",
           body: new FormData(form),
           headers: { "Accept": "application/json" }
         });
-
-        if (res.ok) {
+        if(res.ok){
           form.reset();
-          refreshLinkOrImgHint();
-          if (agreedPriceParam) {
-            // ár param marad, de a mező üres; visszaállítjuk kötelezőre
-            agreedPriceInput.required = true;
-            priceBox.style.display = "grid";
-          }
           okBox.style.display = "block";
           window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
           errBox.style.display = "block";
         }
-      } catch {
+      } catch(_){
         errBox.style.display = "block";
       }
     });
-
-    refreshLinkOrImgHint();
   </script>
 </body>
 </html>
